@@ -1,9 +1,9 @@
 import './cart.css';
 
 const Cart = (props) => {
-    const { quantity = [] } = props;
+    const { quantity = [], handleBusketShow = Function.prototype } = props;
     return (
-        <div className="cart blue darken-4 white-text">
+        <div className="cart blue darken-4 white-text" onClick={handleBusketShow}>
             <i className="material-icons">shopping_cart</i>
             {
                 quantity.length != 0 ? (

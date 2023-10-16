@@ -3,12 +3,14 @@ import { API_KEY, API_URL } from '../../config'
 import Preloader from '../Preloader/Preloader';
 import GoodsList from '../GoodsList/GoodsList';
 import Cart from '../Cart/Cart';
+import BusketList from '../BusketList/BusketList';
 
 
 const Main = () => {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
+    const [isBusketShow, setBusketShow] = useState(false);
 
     useEffect(function getGoogs() {
         fetch(API_URL, {
@@ -48,11 +50,18 @@ const Main = () => {
         }
     }
 
+    const handleBusketShow = () => {
+        setBusketShow(!isBusketShow)
+    }
+
     return (
         <main className="main container">
-            <Cart quantity={order} />
+            <Cart quantity={order} handleBusketShow={handleBusketShow} />
             {
                 loading ? <Preloader /> : <GoodsList goods={goods} addToBusket={addToBusket} />
+            }
+            {
+                isBusketShow && <BusketList order={order} handleBusketShow={handleBusketShow} />
             }
         </main>
     );
