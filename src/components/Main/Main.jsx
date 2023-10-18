@@ -4,6 +4,7 @@ import Preloader from '../Preloader/Preloader';
 import GoodsList from '../GoodsList/GoodsList';
 import Cart from '../Cart/Cart';
 import BusketList from '../BusketList/BusketList';
+import Alert from '../Alert/Alert';
 
 
 const Main = () => {
@@ -11,6 +12,7 @@ const Main = () => {
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
     const [isBusketShow, setBusketShow] = useState(false);
+    const [alertName, setAlertName] = useState('');
 
     useEffect(function getGoogs() {
         fetch(API_URL, {
@@ -48,6 +50,8 @@ const Main = () => {
 
             setOrder(newOrder);
         }
+
+        setAlertName(item.displayName)
     }
 
     const removeFromBusket = (itemId) => {
@@ -91,6 +95,10 @@ const Main = () => {
         setOrder(newOrder)
     };
 
+    const closeAlert = () => {
+        setAlertName('')
+    }
+
     return (
         <main className="main container">
             <Cart quantity={order} handleBusketShow={handleBusketShow} />
@@ -105,6 +113,9 @@ const Main = () => {
                     decQuantity={decQuantity}
                     incQuantity={incQuantity}
                 />
+            }
+            {
+                alertName && <Alert name={alertName} closeAlert={closeAlert} />
             }
         </main>
     );
