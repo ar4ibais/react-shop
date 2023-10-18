@@ -6,6 +6,7 @@
   background-color: #fff;
   width: 50rem;
   max-width: 95%;
+  animation: show 0.5s ease-in-out;
 }
 
 .busket-close {
@@ -14,4 +15,14 @@
   top: 0.5rem;
   right: 0.5rem;
   color: #fff;
+}
+@keyframes show {
+  from {
+    top: 70%;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+  }
 }

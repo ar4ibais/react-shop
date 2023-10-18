@@ -5,13 +5,23 @@ const BusketItem = (props) => {
         mainId,
         displayName,
         price,
-        quantity
+        quantity,
+        removeFromBusket = Function.prototype,
+        decQuantity = Function.prototype,
+        incQuantity = Function.prototype,
     } = props;
+
     return (
         <li className="collection-item">
-            {displayName} x {quantity} = {price * quantity}
+            {displayName} x <i
+                className="material-icons busket-quantity"
+                onClick={() => decQuantity(mainId)}
+            >remove</i> {quantity} <i className="material-icons busket-quantity" onClick={() => incQuantity(mainId)}>add</i> = {price * quantity} руб.
             <span className="secondary-content">
-                <i className="material-icons busket-delete">close</i>
+                <i
+                    onClick={() => removeFromBusket(mainId)}
+                    className="material-icons busket-delete"
+                >close</i>
             </span>
         </li>
     );

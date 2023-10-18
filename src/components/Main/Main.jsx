@@ -50,9 +50,46 @@ const Main = () => {
         }
     }
 
+    const removeFromBusket = (itemId) => {
+        const newOrder = order.filter(item => item.mainId !== itemId);
+        setOrder(newOrder);
+    }
+
     const handleBusketShow = () => {
         setBusketShow(!isBusketShow)
     }
+
+    const incQuantity = (itemId) => {
+        const newOrder = order.map(el => {
+            if (el.mainId === itemId) {
+                // console.log(newOrder);
+                const newQuantity = el.quantity + 1
+                return {
+                    ...el,
+                    quantity: newQuantity
+                }
+            } else {
+                return el;
+            }
+        })
+
+        setOrder(newOrder)
+    };
+
+    const decQuantity = (itemId) => {
+        const newOrder = order.map(el => {
+            if (el.mainId === itemId) {
+                const newQuantity = el.quantity - 1
+                return {
+                    ...el,
+                    quantity: newQuantity >= 1 ? newQuantity : 1
+                }
+            } else {
+                return el;
+            }
+        });
+        setOrder(newOrder)
+    };
 
     return (
         <main className="main container">
@@ -61,7 +98,13 @@ const Main = () => {
                 loading ? <Preloader /> : <GoodsList goods={goods} addToBusket={addToBusket} />
             }
             {
-                isBusketShow && <BusketList order={order} handleBusketShow={handleBusketShow} />
+                isBusketShow && <BusketList
+                    order={order}
+                    handleBusketShow={handleBusketShow}
+                    removeFromBusket={removeFromBusket}
+                    decQuantity={decQuantity}
+                    incQuantity={incQuantity}
+                />
             }
         </main>
     );

@@ -1,3 +1,9 @@
 .busket-delete {
   cursor: pointer;
 }
+
+.busket-quantity {
+  cursor: pointer;
+  vertical-align: middle;
+  color: #26a29a;
+}
