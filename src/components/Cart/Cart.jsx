@@ -5,11 +5,7 @@ const Cart = (props) => {
     return (
         <div className="cart blue darken-4 white-text" onClick={handleBusketShow}>
             <i className="material-icons">shopping_cart</i>
-            {
-                quantity.length != 0 ? (
-                    <span className="cart-quantity">{quantity.length}</span>
-                ) : null
-            }
+            <span className="cart-quantity">{quantity.length}</span>
         </div>
     );
 }

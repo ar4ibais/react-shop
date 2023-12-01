@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import { API_KEY, API_URL } from '../../config'
+import { useState, useEffect, useContext } from 'react';
+import { API_URL } from '../../config'
 import Preloader from '../Preloader/Preloader';
 import GoodsList from '../GoodsList/GoodsList';
 import Cart from '../Cart/Cart';
 import BusketList from '../BusketList/BusketList';
 import Alert from '../Alert/Alert';
+
+import { ShopContext } from '../../context';
 
 
 const Main = () => {
@@ -14,18 +16,6 @@ const Main = () => {
     const [isBusketShow, setBusketShow] = useState(false);
     const [alertName, setAlertName] = useState('');
 
-    useEffect(function getGoogs() {
-        fetch(API_URL, {
-            headers: {
-                'Authorization': '76fe549f-c8db3a8f-ad8380b5-222d3cfd'
-            }
-        })
-            .then(res => res.json())
-            .then(json => {
-                json.shop && setGoods(json.shop.slice(0, 10));
-                setLoading(false);
-            })
-    }, []);
 
     const addToBusket = (item) => {
         const itemIndex = order.findIndex(orderItem => orderItem.mainId === item.mainId);
@@ -98,6 +88,19 @@ const Main = () => {
     const closeAlert = () => {
         setAlertName('')
     }
+
+    useEffect(function getGoogs() {
+        fetch(API_URL, {
+            headers: {
+                'Authorization': '76fe549f-c8db3a8f-ad8380b5-222d3cfd'
+            }
+        })
+            .then(res => res.json())
+            .then(json => {
+                json.shop && setGoods(json.shop.slice(0, 10));
+                setLoading(false);
+            })
+    }, []);
 
     return (
         <main className="main container">
