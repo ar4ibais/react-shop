@@ -7,14 +7,11 @@ const BusketItem = (props) => {
         mainId,
         displayName,
         price,
-        quantity,
-        removeFromBusket = Function.prototype,
-        decQuantity = Function.prototype,
-        incQuantity = Function.prototype,
+        quantity
     } = props;
 
-    const { example } = useContext(ShopContext);
-    console.log(example);
+    const { removeFromBusket, decQuantity, incQuantity } = useContext(ShopContext);
+
 
     return (
         <li className="collection-item">
